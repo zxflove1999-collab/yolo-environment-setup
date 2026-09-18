@@ -6,17 +6,14 @@ from ultralytics import YOLO
 
 ROOT = Path(__file__).resolve().parent
 IMAGE = ROOT / "test.jpg"
-MODEL = ROOT / "yolo11n.pt"
+MODEL = "yolo11n.pt"
 RESULT_DIR = ROOT / "runs" / "predict"
 RESULT_IMAGE = RESULT_DIR / IMAGE.name
 
 if not IMAGE.exists():
     raise FileNotFoundError(f"Test image not found: {IMAGE}")
 
-if not MODEL.exists():
-    raise FileNotFoundError(f"Model file not found: {MODEL}")
-
-model = YOLO(str(MODEL))
+model = YOLO(MODEL)
 model.predict(source=str(IMAGE), save=True, project=str(ROOT / "runs"), name="predict", exist_ok=True)
 
 if not RESULT_IMAGE.exists():

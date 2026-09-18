@@ -34,7 +34,6 @@ YOLO环境配置完整包
    └─ YOLO
       └─ test
          ├─ test.jpg
-         ├─ yolo11n.pt
          ├─ detect_demo.py
          └─ README_demo.md
 ```
@@ -43,12 +42,12 @@ When given a `.zip` file path:
 
 1. Extract it to a temporary or adjacent folder if it has not already been extracted.
 2. Locate the folder that contains `skill/yolo-environment-setup/SKILL.md`.
-3. Locate the demo folder containing `test.jpg`, `yolo11n.pt`, and `detect_demo.py`.
+3. Locate the demo folder containing `test.jpg` and `detect_demo.py`.
 
 When given an extracted folder path:
 
 1. Search that folder recursively for `skill/yolo-environment-setup/SKILL.md`.
-2. Search that folder recursively for a directory containing all three demo files: `test.jpg`, `yolo11n.pt`, and `detect_demo.py`.
+2. Search that folder recursively for a directory containing both demo files: `test.jpg` and `detect_demo.py`.
 
 Install or update the skill by copying the package's `skill/yolo-environment-setup` folder to:
 
@@ -142,14 +141,13 @@ When preparing a demo folder, make it portable and avoid user-specific paths. Re
 YOLO
 └─ test
    ├─ test.jpg
-   ├─ yolo11n.pt
    ├─ detect_demo.py
    └─ README_demo.md
 ```
 
 The demo script should:
 
-- Load `test.jpg` and `yolo11n.pt` from the same folder as the script.
+- Load `test.jpg` from the script folder and use `YOLO("yolo11n.pt")` so Ultralytics downloads the weights when needed. The first run requires network access.
 - Save results under `runs/predict`.
 - Automatically open the result image after inference.
 - Print `YOLO demo finished.` when complete.
@@ -165,17 +163,14 @@ from ultralytics import YOLO
 
 ROOT = Path(__file__).resolve().parent
 IMAGE = ROOT / "test.jpg"
-MODEL = ROOT / "yolo11n.pt"
+MODEL = "yolo11n.pt"
 RESULT_DIR = ROOT / "runs" / "predict"
 RESULT_IMAGE = RESULT_DIR / IMAGE.name
 
 if not IMAGE.exists():
     raise FileNotFoundError(f"Test image not found: {IMAGE}")
 
-if not MODEL.exists():
-    raise FileNotFoundError(f"Model file not found: {MODEL}")
-
-model = YOLO(str(MODEL))
+model = YOLO(MODEL)
 model.predict(source=str(IMAGE), save=True, project=str(ROOT / "runs"), name="predict", exist_ok=True)
 
 if not RESULT_IMAGE.exists():

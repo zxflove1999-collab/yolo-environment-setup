@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.py[cod]
+*.pt
 
 # Local YOLO demo output
 demo/YOLO/test/runs/

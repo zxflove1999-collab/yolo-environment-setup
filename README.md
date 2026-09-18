@@ -15,8 +15,7 @@ demo/
    └─ test/
       ├─ detect_demo.py
       ├─ README_demo.md
-      ├─ test.jpg
-      └─ yolo11n.pt
+      └─ test.jpg
 ```
 
 ## How To Use
@@ -49,4 +48,4 @@ The `runs/` folder is generated locally and is intentionally not committed to th
 
 - CUDA acceleration requires an NVIDIA GPU and a working NVIDIA driver.
 - Computers with only Intel or AMD integrated graphics should use the CPU version of PyTorch.
-- The included `yolo11n.pt` model file is small and is included so the demo can run without downloading a model during the test.
+- On the first run, Ultralytics downloads the official `yolo11n.pt` weights if they are not already available. This requires network access.

@@ -5,11 +5,11 @@
 ## 文件说明
 
 - `test.jpg`：测试图片。
-- `yolo11n.pt`：YOLO 测试模型文件，直接放在当前文件夹即可。
+- `yolo11n.pt`：首次运行时由 Ultralytics 自动下载的官方预训练权重，不包含在仓库中。
 - `detect_demo.py`：测试脚本。
 - `runs/`：运行后自动生成的结果文件夹。
 
-注意：`yolo11n.pt` 必须和 `detect_demo.py` 放在同一个 `test` 文件夹中，不需要额外安装或解压。
+注意：首次运行时如果本地不存在 `yolo11n.pt`，Ultralytics 会自动下载官方预训练权重，因此首次运行需要能够联网。下载后的 `.pt` 文件已通过 `.gitignore` 排除，不应提交到 Git 仓库。
 
 ## 运行方法
 
